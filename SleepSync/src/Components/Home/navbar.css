@@ -1,0 +1,36 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+    background-color: #fff;
+    padding: 10px 20px;
+  }
+  
+  .logo {
+    font-family: 'inter', sans-serif;
+    font-weight: 600;
+    color: #0179D4;
+    font-size: 1.5em;
+  }
+  
+  nav {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    padding: 10px 30px;
+  }
+  
+  nav a {
+    text-decoration: none;
+    color: black;
+    font-weight: 500;
+  }
+  
+  nav a.active {
+    border-bottom: 2px solid #0070f3;
+  }
+  
+  .profile-icon {
+    font-size: 1.2em;
+  }

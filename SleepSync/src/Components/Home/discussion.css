@@ -1,159 +1,119 @@
-
 html, body, #root {
-    height: 100%;
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-  .layout {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    width: 100%;
-  }
-  
-  .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid #ddd;
-    background-color: #fff;
-    padding: 10px 20px;
-  }
-  
-  .logo {
-    font-family: 'inter', sans-serif;
-    font-weight: 600;
-    color: #0179D4;
-    font-size: 1.5em;
-  }
-  
-  nav {
-    display: flex;
-    align-items: center;
-    gap: 50px;
-    padding: 10px 30px;
-  }
-  
-  nav a {
-    text-decoration: none;
-    color: black;
-    font-weight: 500;
-  }
-  
-  nav a.active {
-    border-bottom: 2px solid #0070f3;
-  }
-  
-  .profile-icon {
-    font-size: 1.2em;
-  }
-  
-  .forum {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 20px 60px;
-    padding-bottom: 50px;
-    box-sizing: border-box;
-    width: 100%;
-  }
+.layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+}
 
-  .forum h1 {
-    margin-bottom: 8px;
-  }
+.forum {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 20px 60px;
+  padding-bottom: 50px;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.forum h1 {
+  margin-bottom: 8px;
+}
 
 .forum p {
-  margin-top: 0;
-  margin-bottom: 20px;
-  font-size: 1rem;
-  color: #444;
+margin-top: 0;
+margin-bottom: 20px;
+font-size: 1rem;
+color: #444;
 }
+
+.filters {
+  display: flex;
+  gap: 10px;
+  margin: 20px 0;
+  flex-wrap: wrap;
+}
+
+.filter {
+  padding: 8px px;
+  border: none;
+  background-color: #eee;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.filter.active {
+  background-color: #0070f3;
+  color: white;   
+}
+
+.search-bar {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  width: 100%;
+  max-width: none;
+}
+
+.search-bar input {
+  flex: 1;
+  padding: 10px;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+}
+
+.search-bar button {
+  padding: 10px 20px;
+  background-color: #0070f3;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.new-post {
+  background-color: white;
+  color: #0164D4;
+  border: 2px solid #0164D4;
+  padding: 8px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+
+.discussions {
+  width: 100%;
+  max-width: none;
   
-  .filters {
-    display: flex;
-    gap: 10px;
-    margin: 20px 0;
-    flex-wrap: wrap;
-  }
+}
+
+.discussions .discussion {    
+  padding: 15px 0;
+  border-bottom: 1px solid #ddd;
+  border-top: 1px solid #ddd;
+}
+
+.discussion h3 {
+  margin: 0;
+}
+
+.discussion p {
+  margin: 5px 0;
+  font-size: 0.9em;
+  color: #555;
+}
+
+.tag {
+  color: #0070f3;
+  font-size: 0.9em;
   
-  .filter {
-    padding: 8px px;
-    border: none;
-    background-color: #eee;
-    border-radius: 20px;
-    cursor: pointer;
-  }
-  
-  .filter.active {
-    background-color: #0070f3;
-    color: white;   
-  }
-  
-  .search-bar {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 20px;
-    width: 100%;
-    max-width: none;
-  }
-  
-  .search-bar input {
-    flex: 1;
-    padding: 10px;
-    border-radius: 20px;
-    border: 1px solid #ccc;
-  }
-  
-  .search-bar button {
-    padding: 10px 20px;
-    background-color: #0070f3;
-    color: white;
-    border: none;
-    border-radius: 20px;
-    cursor: pointer;
-  }
-  
-  .new-post {
-    background-color: white;
-    color: #0164D4;
-    border: 2px solid #0164D4;
-    padding: 8px 16px;
-    border-radius: 20px;
-    cursor: pointer;
-    margin-bottom: 20px;
-    font-weight: 500;
-  }
-  
-  .discussions {
-    width: 100%;
-    max-width: none;
-    
-  }
-  
-  .discussions .discussion {    
-    padding: 15px 0;
-    border-bottom: 1px solid #ddd;
-    border-top: 1px solid #ddd;
-  }
-  
-  .discussion h3 {
-    margin: 0;
-  }
-  
-  .discussion p {
-    margin: 5px 0;
-    font-size: 0.9em;
-    color: #555;
-  }
-  
-  .tag {
-    color: #0070f3;
-    font-size: 0.9em;
-    
-  }
-  
-  
+}
