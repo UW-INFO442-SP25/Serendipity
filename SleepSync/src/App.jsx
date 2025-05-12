@@ -1,10 +1,10 @@
 import React from 'react'
 // import all of your page files Home.jsx
-import Home from './components/Home/home.js';
-import Home from './components/Home/login.js';
-import Home from './components/Home/resources.js';
-import Home from './components/Home/discussion.js';
-import Home from './components/Home/tracker.js';
+import Home from './components/Home/home.jsx';
+import Login from './components/Home/login.jsx';
+import Resources from './components/Home/resources.jsx';
+import Discussion from './components/Home/discussion.jsx';
+import Tracker from './components/Home/tracker.jsx';
 
 const App = () => {
   return (
