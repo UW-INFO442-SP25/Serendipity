@@ -61,6 +61,17 @@ html, body, #root {
     box-sizing: border-box;
     width: 100%;
   }
+
+  .forum h1 {
+    margin-bottom: 8px;
+  }
+
+.forum p {
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-size: 1rem;
+  color: #444;
+}
   
   .filters {
     display: flex;
