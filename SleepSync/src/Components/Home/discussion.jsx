@@ -4,17 +4,6 @@ import './discussion.css';
 const Discussion = () => {
   return (
     <div>
-      <header className="navbar">
-        <div className="logo">SleepSync</div>
-        <nav>
-          <a href="#">Home</a>
-          <a href="#">Resources</a>
-          <a className="active" href="#">Discussion Forum</a>
-          <a href="#">Behavior Tracker</a>
-          <span className="profile-icon">👤</span>
-        </nav>
-      </header>
-
       <main className="forum">
         <h1>Discussion Forum</h1>
         <p>Connect with others, share experiences, and find support in your OSAS management</p>
