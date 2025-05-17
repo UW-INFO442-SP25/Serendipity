@@ -51,8 +51,12 @@ button:hover {
 }
 button:focus,
 button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  outline: 2px;
+  outline-offset: 2px;
+
 }
+
+
 
 @media (prefers-color-scheme: light) {
   :root {
