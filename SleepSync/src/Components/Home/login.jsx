@@ -1,27 +1,37 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import "./login.css";
 import landingImg from "../../assets/landing.jpg";
 
 const Login = () => {
+  const navigate = useNavigate();
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    // Add login later
+    navigate("/home");
+  };
+
+  const handleGuest = () => {
+    navigate("/home");
+  };
+
   return (
     <>
-      {/* Full-width header with logo */}
       <div className="login-header">
         <div className="login-logo-wrapper">
-        <h2 className="login-logo">SleepSync</h2>
+          <h2 className="login-logo">SleepSync</h2>
         </div>
       </div>
 
-      {/* Page content */}
       <div className="login-container">
-        {/* Form and image section */}
         <div className="login-content">
           {/* Login form */}
           <div className="login-card">
             <h1>Welcome back!</h1>
             <p>Please enter your details here</p>
 
-            <form>
+            <form onSubmit={handleLogin}>
               <label className="login-label" htmlFor="email">Email or username</label>
               <input type="text" id="email" required />
 
@@ -36,11 +46,16 @@ const Login = () => {
                 Don’t have an account? <a href="#">Sign up!</a>
               </p>
 
-              <button type="button" className="login-guest-btn">Continue as Guest</button>
+              <button
+                type="button"
+                className="login-guest-btn"
+                onClick={handleGuest}
+              >
+                Continue as Guest
+              </button>
             </form>
           </div>
 
-          {/* Image section */}
           <div className="login-image-card">
             <img src={landingImg} alt="Person sleeping with data charts" />
           </div>

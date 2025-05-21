@@ -1,10 +1,13 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import './home.css';
 import img1 from '../../assets/img1.jpg';
 import img2 from '../../assets/img2.jpg';
 import img3 from '../../assets/img3.jpg';
 
 const Home = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="home-container">
       {/* Hero Section */}
@@ -12,7 +15,9 @@ const Home = () => {
         <div className="hero-content">
           <h1>Better Sleep. Better Life</h1>
           <p>A comprehensive platform to understand, manage, and improve your sleep apnea journey</p>
-          <button className="hero-btn">Sign-up / Log-in</button>
+          <button className="hero-btn" onClick={() => navigate('/login')}>
+            Sign-up / Log-in
+          </button>
         </div>
       </section>
 
@@ -20,7 +25,9 @@ const Home = () => {
       <section className="about">
         <h2>About us</h2>
         <p>Learn more about us and explore our forums, behavior tracker, and resources</p>
-        <button className="learn-more-btn">Learn More</button>
+        <button className="learn-more-btn" onClick={() => navigate('/resources')}>
+          Learn More
+        </button>
       </section>
 
       {/* Features Section */}
@@ -71,7 +78,9 @@ const Home = () => {
             </div>
           </div>
         </div>
-        <button className="view-all-btn">View All Resources</button>
+        <button className="view-all-btn" onClick={() => navigate('/resources')}>
+          View All Resources
+        </button>
       </section>
     </div>
   );

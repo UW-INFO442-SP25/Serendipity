@@ -1,16 +1,19 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import './Navbar.css';
 
 const Navbar = () => {
   return (
     <header className="navbar">
-      <div className="logo">SleepSync</div>
+      <div className="logo">
+        <NavLink to="/home">SleepSync</NavLink>
+      </div>
       <nav>
-        <a href="#">Home</a>
-        <a href="#">Resources</a>
-        <a href="#">Discussion Forum</a>
-        <a href="#">Behavior Tracker</a>
-        <span className="profile-icon">👤</span>
+        <NavLink to="/home">Home</NavLink>
+        <NavLink to="/resources">Resources</NavLink>
+        <NavLink to="/discussion">Discussion Forum</NavLink>
+        <NavLink to="/tracker">Behavior Tracker</NavLink>
+        <NavLink to="/login" className="profile-icon">👤</NavLink>
       </nav>
     </header>
   );
