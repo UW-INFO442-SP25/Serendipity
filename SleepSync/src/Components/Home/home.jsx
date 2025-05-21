@@ -48,21 +48,27 @@ const Home = () => {
       {/* Educational Resources Section */}
       <section className="resources">
         <h2>Educational Resources</h2>
-        <div className="resource-cards">
-          <div className="resource-card">
-          <img src={img1} alt="Understanding Sleep Apnea" />
-            <h4>Understanding Sleep Apnea</h4>
-            <p>Learn the basics of sleep apnea</p>
+        <div className="card-grid">
+          <div className="card">
+            <img src={img1} alt="Understanding Sleep Apnea" />
+            <div className="card-text">
+              <h4>Understanding Sleep Apnea</h4>
+              <p>Learn the basics of sleep apnea</p>
+            </div>
           </div>
-          <div className="resource-card">
-          <img src={img2} alt="Understanding Sleep Apnea" />
-            <h4>Understanding Sleep Apnea</h4>
-            <p>Learn the basics of sleep apnea</p>
+          <div className="card">
+            <img src={img2} alt="Understanding Sleep Apnea" />
+            <div className="card-text">
+              <h4>Understanding Sleep Apnea</h4>
+              <p>Learn the basics of sleep apnea</p>
+            </div>
           </div>
-          <div className="resource-card">
-          <img src={img3} alt="Understanding Sleep Apnea" />
-            <h4>Understanding Sleep Apnea</h4>
-            <p>Learn the basics of sleep apnea</p>
+          <div className="card">
+            <img src={img3} alt="Understanding Sleep Apnea" />
+            <div className="card-text">
+              <h4>Understanding Sleep Apnea</h4>
+              <p>Learn the basics of sleep apnea</p>
+            </div>
           </div>
         </div>
         <button className="view-all-btn">View All Resources</button>
