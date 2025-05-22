@@ -15,15 +15,52 @@ const Discussion = () => {
     setShowPopup(false);
   };
 
-  const handlePopupConfirm = (postData) => {
-    alert("New post created:\n" + JSON.stringify(postData, null, 2));
-    setShowPopup(false);
+ const handlePopupConfirm = (postData) => {
+  const newPost = {
+    title: postData.title,
+    author: "You", 
+    replies: 0,
+    recent: "Just now",
+    tag: postData.category
   };
+
+  setDiscussions(prev => [newPost, ...prev]);
+  setShowPopup(false);
+};
 
   // for button filtering
   const [activeFilter, setActiveFilter] = useState("All");
 
   const filters = ["All", "Treatment", "Tips", "Stories", "Reviews", "Questions"];
+  const [discussions, setDiscussions] = useState(() => {
+  const saved = localStorage.getItem('discussions');
+  return saved ? JSON.parse(saved) : [
+    {
+      title: "CPAP Mask Comfort Tips",
+      author: "Sleepwell42",
+      replies: 20,
+      recent: "2 hours ago",
+      tag: "Tips"
+    },
+    {
+      title: "Tracking my Progress",
+      author: "Breather34",
+      replies: 4,
+      recent: "Yesterday",
+      tag: "Treatment"
+    },
+    {
+      title: "ResMed vs. Philips? - which one do you prefer?",
+      author: "CPAPwarrior1",
+      replies: 16,
+      recent: "2 days ago",
+      tag: "Reviews"
+    }
+  ];
+});
+const filteredDiscussions = activeFilter === "All"
+  ? discussions
+  : discussions.filter((d) => d.tag === activeFilter);
 
   return (
     <div>
@@ -52,23 +89,17 @@ const Discussion = () => {
           <button className="new-post" onClick={handleNewPostClick}>+ New Post</button>
 
           <section className="discussions">
-            <h2>Recent Discussions</h2>
-            <div className="discussion">
-              <h3>CPAP Mask Comfort Tips</h3>
-              <p>Posted by Sleepwell42 · 20 replies · Most recent: 2 hours ago</p>
-              <span className="tag">Tips</span>
-            </div>
-            <div className="discussion">
-              <h3>Tracking my Progress</h3>
-              <p>Posted by Breather34 · 4 replies · Most recent: Yesterday</p>
-              <span className="tag">Treatment</span>
-            </div>
-            <div className="discussion">
-              <h3>ResMed vs. Philips? - which one do you prefer?</h3>
-              <p>Posted by CPAPwarrior1 · 16 replies · Most recent: 2 days ago</p>
-              <span className="tag">Reviews</span>
-            </div>
-          </section>
+  <h2>{activeFilter === "All" ? "Recent Discussions" : `${activeFilter} Discussions`}</h2>
+  {filteredDiscussions.map((discussion, index) => (
+    <div key={index} className="discussion">
+      <h3>{discussion.title}</h3>
+      <p>
+        Posted by {discussion.author} · {discussion.replies} replies · Most recent: {discussion.recent}
+      </p>
+      <span className="tag">{discussion.tag}</span>
+    </div>
+  ))}
+</section>
         </main>
       </div>
 
