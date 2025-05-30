@@ -1,14 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./login.css";
 import landingImg from "../../assets/landing.jpg";
 
 const Login = () => {
   const navigate = useNavigate();
+  const [isLogin, setIsLogin] = useState(true);
 
-  const handleLogin = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    // Add login later
+    // TODO: Add Firebase Auth logic
     navigate("/home");
   };
 
@@ -26,34 +27,49 @@ const Login = () => {
 
       <div className="login-container">
         <div className="login-content">
-          {/* Login form */}
+          {/* Form card */}
           <div className="login-card">
-            <h1>Welcome back!</h1>
-            <p className="login-note">
-              Don’t want to log in? You can <strong>continue as a guest</strong> below to explore the app, 
-              but some features may be limited.
-            </p>
+            <h1>{isLogin ? "Welcome back!" : "Create an Account"}</h1>
 
-            <form onSubmit={handleLogin}>
-              <label className="login-label" htmlFor="email">Email or username</label>
-              <input type="text" id="email" required />
+            {isLogin && (
+              <p className="login-note">
+                Don’t want to log in? You can <strong>continue as a guest</strong> below to explore the app, 
+                but some features may be limited.
+              </p>
+            )}
+
+            <form onSubmit={handleSubmit}>
+              <label className="login-label" htmlFor="email">Email</label>
+              <input type="email" id="email" required />
+
+              {!isLogin && (
+                <>
+                  <label className="login-label" htmlFor="username">Username</label>
+                  <input type="text" id="username" required />
+                </>
+              )}
 
               <label className="login-label" htmlFor="password">Password</label>
               <input type="password" id="password" required />
 
-              <a href="#" className="login-forgot-link">Forgot password?</a>
-
-              <button type="submit" className="login-btn">Log In</button>
+              {isLogin ? (
+                <>
+                  <a href="#" className="login-forgot-link">Forgot password?</a>
+                  <button type="submit" className="login-btn">Log In</button>
+                </>
+              ) : (
+                <button type="submit" className="login-btn">Sign Up</button>
+              )}
 
               <p className="login-signup-text">
-                Don’t have an account? <a href="#">Sign up!</a>
+                {isLogin ? (
+                  <>Don’t have an account? <a href="#" onClick={() => setIsLogin(false)}>Sign up!</a></>
+                ) : (
+                  <>Already have an account? <a href="#" onClick={() => setIsLogin(true)}>Log in</a></>
+                )}
               </p>
 
-              <button
-                type="button"
-                className="login-guest-btn"
-                onClick={handleGuest}
-              >
+              <button type="button" className="login-guest-btn" onClick={handleGuest}>
                 Continue as Guest
               </button>
             </form>
