@@ -127,3 +127,62 @@ color: #444;
   
 }
 
+@media (max-width: 1023px) {
+  .forum {
+    padding: 20px 16px;
+  }
+
+  .forum h1 {
+    font-size: 1.5rem;
+  }
+
+  .forum p {
+    font-size: 0.95rem;
+  }
+
+  .filters {
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 16px 0;
+  }
+
+  .filter {
+    font-size: 0.9rem;
+    padding: 8px 12px;
+  }
+
+  .search-bar {
+    flex-direction: column;
+    gap: 8px;
+    align-items: stretch;
+  }
+
+  .search-bar input {
+    width: 100%;
+    font-size: 1rem;
+  }
+
+  .search-bar button {
+    width: 100%;
+    font-size: 1rem;
+    padding: 10px;
+  }
+
+  .new-post {
+    width: 100%;
+    text-align: center;
+    font-size: 0.95rem;
+  }
+
+  .discussion h3 {
+    font-size: 1.05rem;
+  }
+
+  .discussion p {
+    font-size: 0.85rem;
+  }
+
+  .tag {
+    font-size: 0.85rem;
+  }
+}

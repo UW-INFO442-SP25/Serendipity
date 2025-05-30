@@ -1,4 +1,4 @@
-body {
+  body {
     margin: 0;
     padding: 0;
     font-family: 'Segoe UI', sans-serif;
@@ -162,4 +162,53 @@ body {
     background-color: #f4f7fa;
     border: 2px solid #0164D4;
   }
-  
+
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* mobile and tablet: max-width 1023px */
+@media (max-width: 1023px) {
+  .login-image-card {
+    display: none !important;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+  }
+
+  .login-container {
+    padding: 40px 16px;
+    margin: 0 auto;
+  }
+
+  .login-logo-wrapper {
+    border-bottom: 1px solid #e0e0e0;
+    margin-bottom: 40px;
+    width: 100%;
+  }
+
+  .login-logo {
+    margin-left: 0;
+    text-align: center;
+  }
+
+  .login-content {
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+  }
+
+  .login-card {
+    margin: 0 auto;
+    padding: 20px;
+    max-width: 100%;
+  }
+
+  .login-card h1 {
+    font-size: 40px;
+  }
+}

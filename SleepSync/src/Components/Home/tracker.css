@@ -110,3 +110,61 @@
     font-weight: bold;
   }
   
+  @media (max-width: 1023px) {
+  .behavior-container {
+    padding: 1rem;
+    margin: 0 1rem;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+    text-align: left;
+  }
+
+  .tab-bar {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .tab-bar button {
+    width: 100%;
+    font-size: 1rem;
+  }
+
+  .tab-content {
+    font-size: 1rem;
+    padding: 1rem;
+  }
+
+  .right-buttons {
+    position: static;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .right-buttons button {
+    flex: 1 1 45%;
+    width: 100%;
+    font-size: 0.95rem;
+    padding: 0.6rem;
+  }
+
+  .symptom-form {
+    padding: 1rem;
+  }
+
+  .symptom-form input,
+  .symptom-form select {
+    width: 100%;
+    font-size: 1rem;
+  }
+
+  .symptom-form button {
+    width: 100%;
+    font-size: 1rem;
+    padding: 0.6rem;
+  }
+}

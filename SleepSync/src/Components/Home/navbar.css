@@ -56,3 +56,42 @@ nav a.active {
   font-size: 1.3em;
   color: #0179D4;
 }
+
+/* Hamburger icon*/
+.hamburger {
+  display: none;
+  font-size: 1.5em;
+  cursor: pointer;
+  color: #0179D4;
+}
+
+/* mobile and tablet: max-width 1023px */
+@media (max-width: 1023px) {
+  .navbar {
+    padding: 16px 20px;
+    position: relative;
+  }
+
+  nav {
+    display: none;
+    flex-direction: column;
+    gap: 16px;
+    background-color: #fff;
+    position: absolute;
+    top: 64px;
+    right: 20px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    z-index: 1000;
+  }
+
+  nav.show-menu {
+    display: flex;
+  }
+
+  .hamburger {
+    display: block;
+  }
+}
+
