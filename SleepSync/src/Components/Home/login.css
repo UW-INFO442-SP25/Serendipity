@@ -91,7 +91,7 @@
   
   .login-card p {
     font-size: 14px;
-    color: #7d7d7d;
+    color: #2e2e2e;
     margin-bottom: 20px;
   }
   
@@ -166,6 +166,13 @@
 html, body {
   max-width: 100%;
   overflow-x: hidden;
+}
+
+.login-note {
+  font-size: 13px;
+  color: #5c5c5c;
+  margin-top: 20px;
+  margin-bottom: 10px;
 }
 
 /* mobile and tablet: max-width 1023px */

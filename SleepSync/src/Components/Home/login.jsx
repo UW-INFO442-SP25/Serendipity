@@ -29,7 +29,10 @@ const Login = () => {
           {/* Login form */}
           <div className="login-card">
             <h1>Welcome back!</h1>
-            <p>Please enter your details here</p>
+            <p className="login-note">
+              Don’t want to log in? You can <strong>continue as a guest</strong> below to explore the app, 
+              but some features may be limited.
+            </p>
 
             <form onSubmit={handleLogin}>
               <label className="login-label" htmlFor="email">Email or username</label>
