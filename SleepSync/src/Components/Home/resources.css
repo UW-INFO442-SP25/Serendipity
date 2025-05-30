@@ -38,6 +38,7 @@
   background-color: #fff;
   transition: transform 0.2s ease, border-color 0.2s ease;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  height: 100%;
 }
 
 .card:hover {
