@@ -1,29 +1,35 @@
 import React from 'react'
 import {
-  LineChart, Line, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer, ReferenceLine, Label
+  LineChart, Line, XAxis, YAxis, Tooltip, Legend,
+  ResponsiveContainer, ReferenceLine, Label
 } from 'recharts'
 
-const data = [
-  { date: '2025-04-01', hours: 5 },
-  { date: '2025-04-02', hours: 0 },
-  { date: '2025-04-03', hours: 5.5 },
-  { date: '2025-04-04', hours: 6.1 },
-  { date: '2025-04-05', hours: 2.5 },
-  { date: '2025-04-06', hours: 0 },
-  { date: '2025-04-07', hours: 7 },
-  { date: '2025-04-08', hours: 5.5 },
-  { date: '2025-04-09', hours: 0 },
-  { date: '2025-04-10', hours: 6.8 },
-  { date: '2025-04-11', hours: 4 },
-  { date: '2025-04-12', hours: 5.2 },
-  { date: '2025-04-13', hours: 0 },
-  { date: '2025-04-14', hours: 5.9 },
-]
-
-function BehaviorChart() {
+function BehaviorChart({ data }) {
   return (
     <div className="chart-wrapper">
-      <h3>CPAP Usage Tracking (April 1–14, 2025)</h3>
+      <h3 style={{ marginBottom: '1rem' }}>CPAP Usage Tracking</h3>
+
+      {/* Instruction Section */}
+      <div
+        className="chart-instructions"
+        style={{
+          backgroundColor: '#f9f9f9',
+          padding: '1rem',
+          borderRadius: '6px',
+          marginBottom: '1.5rem',
+          boxShadow: '0 2px 8px rgba(0, 0, 0, 0.05)',
+          maxWidth: '800px'
+        }}
+      >
+        <h4 style={{ marginTop: 0, fontWeight: '600' }}>Instructions</h4>
+        <ul style={{ marginLeft: '1.5rem', color: '#444', lineHeight: 1.6 }}>
+          <li><strong>Alert:</strong> Trigger alerts when CPAP usage drops too low.</li>
+          <li><strong>Device:</strong> Select and save your CPAP device model.</li>
+          <li><strong>Switch:</strong> Change between standard / auto / boost modes.</li>
+        </ul>
+      </div>
+
+      {/* Chart Section */}
       <ResponsiveContainer width="100%" height={300}>
         <LineChart data={data}>
           <XAxis dataKey="date" />
