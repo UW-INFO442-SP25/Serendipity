@@ -1,11 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { collection, addDoc, getDocs, onSnapshot, query, orderBy, serverTimestamp } from 'firebase/firestore';
+import { db } from '../../firebase'
 import './discussion.css';
 import './popup.css';
 import Popup from './popup.jsx';
 
+
 // new post popup
 const Discussion = () => {
   const [showPopup, setShowPopup] = useState(false);
+  const [discussions, setDiscussions] = useState([]);
+  const [activeFilter, setActiveFilter] = useState("All");
+
+  const filters = ["All", "Treatment", "Tips", "Stories", "Reviews", "Questions"];
+  
 
   const handleNewPostClick = () => {
     setShowPopup(true);
@@ -15,49 +24,37 @@ const Discussion = () => {
     setShowPopup(false);
   };
 
- const handlePopupConfirm = (postData) => {
-  const newPost = {
+const handlePopupConfirm = async (postData) => {
+  try {
+  await addDoc(collection(db, "discussions"), {
     title: postData.title,
-    author: "You", 
+    content: postData.content,
+    author: "You", // You can add real auth later
     replies: 0,
-    recent: "Just now",
-    tag: postData.category
-  };
-
-  setDiscussions(prev => [newPost, ...prev]);
+    tag: postData.category,
+    timestamp: serverTimestamp()
+  });
   setShowPopup(false);
+} catch (error) {
+  console.error("error adding document: ", error);
+  alert("Failed to post discussion, Please try again later.");
+}
 };
 
   // for button filtering
-  const [activeFilter, setActiveFilter] = useState("All");
 
-  const filters = ["All", "Treatment", "Tips", "Stories", "Reviews", "Questions"];
-  const [discussions, setDiscussions] = useState(() => {
-  const saved = localStorage.getItem('discussions');
-  return saved ? JSON.parse(saved) : [
-    {
-      title: "CPAP Mask Comfort Tips",
-      author: "Sleepwell42",
-      replies: 20,
-      recent: "2 hours ago",
-      tag: "Tips"
-    },
-    {
-      title: "Tracking my Progress",
-      author: "Breather34",
-      replies: 4,
-      recent: "Yesterday",
-      tag: "Treatment"
-    },
-    {
-      title: "ResMed vs. Philips? - which one do you prefer?",
-      author: "CPAPwarrior1",
-      replies: 16,
-      recent: "2 days ago",
-      tag: "Reviews"
-    }
-  ];
-});
+useEffect(() => {
+  const q = query(collection(db, "discussions"), orderBy("timestamp", "desc"));
+  const unsubscribe = onSnapshot(q, (snapshot) => {
+    const posts = snapshot.docs.map(doc => ({
+      id: doc.id,
+      ...doc.data()
+    }));
+    setDiscussions(posts);
+  });
+  return () => unsubscribe(); // Cleanup listener
+}, []);
+
 const filteredDiscussions = activeFilter === "All"
   ? discussions
   : discussions.filter((d) => d.tag === activeFilter);
@@ -90,15 +87,21 @@ const filteredDiscussions = activeFilter === "All"
 
           <section className="discussions">
   <h2>{activeFilter === "All" ? "Recent Discussions" : `${activeFilter} Discussions`}</h2>
-  {filteredDiscussions.map((discussion, index) => (
-    <div key={index} className="discussion">
-      <h3>{discussion.title}</h3>
-      <p>
-        Posted by {discussion.author} · {discussion.replies} replies · Most recent: {discussion.recent}
-      </p>
-      <span className="tag">{discussion.tag}</span>
-    </div>
-  ))}
+  {filteredDiscussions.map((discussion) => {
+    const formattedDate = discussion.timestamp
+    ? discussion.timestamp.toDate().toLocaleString()
+    : "Just now";
+
+    return(
+    <Link to={`/post/${discussion.id}`} key={discussion.id} className="discussions-Link">
+    <h3>{discussion.title}</h3>
+    <p>
+      Posted by {discussion.author} · {discussion.replies || 0} replies · Most recent: {formattedDate}
+    </p>
+    <span className="tag">{discussion.tag}</span>
+  </Link>
+    );
+})}
 </section>
         </main>
       </div>
