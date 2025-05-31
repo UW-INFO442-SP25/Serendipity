@@ -136,6 +136,14 @@ export default function Profile() {
     setSaving(false);
   };
 
+  const handleLogout = async () => {
+    const confirmed = window.confirm('Are you sure you want to log out?');
+    if (confirmed) {
+      await auth.signOut();
+      navigate('/login');
+    }
+  };
+
   if (!user) return <p>Loading user...</p>;
   if (loading) return <p>Loading profile...</p>;
 
@@ -150,7 +158,7 @@ export default function Profile() {
       <h1>My Account</h1>
       <p className="subtext">Manage your identity and preferences</p>
 
-      <div className="profile-wrapper"> {/* 🌟 blue container START */}
+      <div className="profile-wrapper">
         <div className="profile-card">
           <div className="avatar-section">
             <label htmlFor="avatar-upload" className="avatar-wrapper">
@@ -253,7 +261,12 @@ export default function Profile() {
             <p><strong>User ID:</strong> {user.uid}</p>
           </div>
         )}
-      </div> {/* 🌟 blue container END */}
+
+        {/* 👇 Right bottom logout inside profile-wrapper */}
+        <div className="logout-wrapper">
+          <button className="logout-btn" onClick={handleLogout}>Log Out</button>
+        </div>
+      </div>
     </div>
   );
 }
