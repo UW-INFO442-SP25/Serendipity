@@ -1,20 +1,58 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  signInAnonymously,
+  updateProfile
+} from "firebase/auth";
+import { doc, setDoc } from "firebase/firestore";
+import { db } from "../../firebase";
 import "./login.css";
 import landingImg from "../../assets/landing.jpg";
 
 const Login = () => {
   const navigate = useNavigate();
   const [isLogin, setIsLogin] = useState(true);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("");
+  const [error, setError] = useState(null);
 
-  const handleSubmit = (e) => {
+  const auth = getAuth();
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // TODO: Add Firebase Auth logic
-    navigate("/home");
+    setError(null);
+    try {
+      if (isLogin) {
+        await signInWithEmailAndPassword(auth, email, password);
+      } else {
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        const user = userCredential.user;
+
+        await updateProfile(user, { displayName: username });
+
+        await setDoc(doc(db, 'profiles', user.uid), {
+          username: username,
+          bio: '',
+          createdAt: new Date().toISOString()
+        });
+      }
+      navigate("/home");
+    } catch (err) {
+      setError(err.message);
+    }
   };
 
-  const handleGuest = () => {
-    navigate("/home");
+  const handleGuest = async () => {
+    try {
+      await signInAnonymously(auth);
+      navigate("/home");
+    } catch (err) {
+      setError(err.message);
+    }
   };
 
   return (
@@ -38,19 +76,42 @@ const Login = () => {
               </p>
             )}
 
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} aria-label="Login Form">
               <label className="login-label" htmlFor="email">Email</label>
-              <input type="email" id="email" required />
+              <input
+                type="email"
+                id="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                aria-required="true"
+              />
 
               {!isLogin && (
                 <>
                   <label className="login-label" htmlFor="username">Username</label>
-                  <input type="text" id="username" required />
+                  <input
+                    type="text"
+                    id="username"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                    required
+                    aria-required="true"
+                  />
                 </>
               )}
 
               <label className="login-label" htmlFor="password">Password</label>
-              <input type="password" id="password" required />
+              <input
+                type="password"
+                id="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                aria-required="true"
+              />
+
+              {error && <p className="error-msg" role="alert">{error}</p>}
 
               {isLogin ? (
                 <>
