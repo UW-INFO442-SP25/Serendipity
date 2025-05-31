@@ -7,8 +7,7 @@ import Resources from './Components/Home/resources.jsx'
 import Discussion from './Components/Home/discussion.jsx'
 import Post from './Components/Home/posts.jsx'
 import Tracker from './Components/Home/tracker.jsx'
-
-
+import Profile from './Components/Home/profile.jsx' 
 const App = () => {
   return (
     <Router>
@@ -49,6 +48,14 @@ const App = () => {
             <Post />
           </>
         } />
+
+        <Route path="/profile" element={
+          <>
+            <Navbar />
+            <Profile />
+          </>
+        } />
+
       </Routes>
     </Router>
   )
