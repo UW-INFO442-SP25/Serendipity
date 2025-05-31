@@ -5,6 +5,7 @@ import { doc, getDoc, setDoc } from 'firebase/firestore';
 import { db } from '../../firebase';
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 import defaultAvatar from '../../assets/default-avatar.png';
+import addIcon from '../../assets/add-icon-circle.png';
 import './profile.css';
 
 export default function Profile() {
@@ -147,96 +148,112 @@ export default function Profile() {
   return (
     <div className="profile-page">
       <h1>My Account</h1>
-      <div className="profile-card">
-        <div className="avatar-section">
-          <label htmlFor="avatar-upload" className="avatar-wrapper">
-            <img
-              src={previewUrl || profile.avatarUrl || defaultAvatar}
-              alt="Avatar"
-              className="avatar-img"
-            />
-            {isEditing && <span className="avatar-edit">+</span>}
-            {isEditing && (
-              <input
-                id="avatar-upload"
-                type="file"
-                accept="image/png, image/jpeg"
-                onChange={handleImageChange}
-                hidden
+      <p className="subtext">Manage your identity and preferences</p>
+
+      <div className="profile-wrapper"> {/* 🌟 blue container START */}
+        <div className="profile-card">
+          <div className="avatar-section">
+            <label htmlFor="avatar-upload" className="avatar-wrapper">
+              <img
+                src={previewUrl || profile.avatarUrl || defaultAvatar}
+                alt="Avatar"
+                className="avatar-img"
               />
+              {isEditing && (
+                <>
+                  <img src={addIcon} alt="Edit" className="avatar-edit-icon" />
+                  <input
+                    id="avatar-upload"
+                    type="file"
+                    accept="image/png, image/jpeg"
+                    onChange={handleImageChange}
+                    hidden
+                  />
+                </>
+              )}
+            </label>
+            {uploadProgress > 0 && uploadProgress < 100 && (
+              <p className="upload-progress">Uploading: {uploadProgress.toFixed(0)}%</p>
             )}
-          </label>
-          {uploadProgress > 0 && uploadProgress < 100 && (
-            <p className="upload-progress">Uploading: {uploadProgress.toFixed(0)}%</p>
-          )}
+          </div>
+
+          <div className="profile-details">
+            {isEditing ? (
+              <>
+                <label>Name</label>
+                <input
+                  value={profile.name}
+                  onChange={(e) => setProfile({ ...profile, name: e.target.value })}
+                  placeholder="Full Name"
+                />
+                <label>Username</label>
+                <input
+                  value={profile.username}
+                  onChange={(e) => setProfile({ ...profile, username: e.target.value })}
+                  placeholder="Username"
+                />
+                <label>Email</label>
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+                <label>New Password</label>
+                <input
+                  type="password"
+                  value={newPassword}
+                  onChange={(e) => setNewPassword(e.target.value)}
+                />
+                <label>Confirm Password</label>
+                <input
+                  type="password"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                />
+                <label>Bio</label>
+                <textarea
+                  value={profile.bio}
+                  onChange={(e) => setProfile({ ...profile, bio: e.target.value })}
+                />
+              </>
+            ) : (
+              <>
+                <h2>{profile.name || 'No Name'}</h2>
+                <p className="username">@{profile.username || 'username'}</p>
+                <p>Member since: {formattedDate}</p>
+                {profile.bio && <p className="bio">{profile.bio}</p>}
+              </>
+            )}
+          </div>
+
+          <div className="edit-btn-wrapper">
+            {isEditing ? (
+              <button
+                onClick={handleSave}
+                className="edit-btn"
+                disabled={saving || (uploadProgress > 0 && uploadProgress < 100)}
+              >
+                Save
+              </button>
+            ) : (
+              <button
+                onClick={() => setIsEditing(true)}
+                className="edit-btn"
+              >
+                Edit Profile
+              </button>
+            )}
+          </div>
+          {message && <p className="success-msg">{message}</p>}
         </div>
 
-        <div className="profile-details">
-          {isEditing ? (
-            <>
-              <label>Name</label>
-              <input
-                value={profile.name}
-                onChange={(e) => setProfile({ ...profile, name: e.target.value })}
-                placeholder="Full Name"
-              />
-              <label>Username</label>
-              <input
-                value={profile.username}
-                onChange={(e) => setProfile({ ...profile, username: e.target.value })}
-                placeholder="Username"
-              />
-              <label>Email</label>
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-              <label>New Password</label>
-              <input
-                type="password"
-                value={newPassword}
-                onChange={(e) => setNewPassword(e.target.value)}
-              />
-              <label>Confirm Password</label>
-              <input
-                type="password"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-              />
-              <label>Bio</label>
-              <textarea
-                value={profile.bio}
-                onChange={(e) => setProfile({ ...profile, bio: e.target.value })}
-              />
-            </>
-          ) : (
-            <>
-              <h2>{profile.name || 'No Name'}</h2>
-              <p className="username">@{profile.username || 'username'}</p>
-              <p>Member since: {formattedDate}</p>
-              {profile.bio && <p className="bio">{profile.bio}</p>}
-            </>
-          )}
-        </div>
-
-        <div className="edit-btn-wrapper">
-          {isEditing ? (
-            <button
-              onClick={handleSave}
-              className="edit-btn"
-              disabled={saving || (uploadProgress > 0 && uploadProgress < 100)}
-            >
-              Save
-            </button>
-          ) : (
-            <button onClick={() => setIsEditing(true)} className="edit-btn">
-              Edit Profile
-            </button>
-          )}
-        </div>
-        {message && <p className="success-msg">{message}</p>}
-      </div>
+        {!isEditing && (
+          <div className="profile-footer">
+            <p><strong>Last login:</strong> {new Date(user.metadata.lastSignInTime).toLocaleString()}</p>
+            <p><strong>User ID:</strong> {user.uid}</p>
+          </div>
+        )}
+      </div> {/* 🌟 blue container END */}
     </div>
   );
 }
