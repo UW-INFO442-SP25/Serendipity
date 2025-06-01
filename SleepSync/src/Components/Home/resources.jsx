@@ -78,15 +78,13 @@ const Resources = () => {
             treatment may involve lifestyle changes, CPAP therapy, or medical procedures. Early
             diagnosis and proper care can significantly improve quality of life.
           </p>
-          <figure>
-            <figcaption>Common Symptoms Include:</figcaption>
-            <ul role="list">
-              <li role="listitem">Loud snoring or gasping during sleep</li>
-              <li role="listitem">Daytime drowsiness or difficulty concentrating</li>
-              <li role="listitem">Morning headaches or dry mouth</li>
-              <li role="listitem">Interrupted breathing observed by a partner</li>
-            </ul>
-          </figure>
+          <h2>Common Symptoms Include:</h2>
+          <div className="symptom-grid">
+            <div className="symptom-card">Loud snoring or gasping during sleep</div>
+            <div className="symptom-card">Daytime drowsiness or difficulty concentrating</div>
+            <div className="symptom-card">Morning headaches or dry mouth</div>
+            <div className="symptom-card">Interrupted breathing observed by a partner</div>
+          </div>
         </section>
 
         {/* Educational Resources */}
