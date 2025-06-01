@@ -5,9 +5,16 @@
   margin: 0 auto;
 }
 
+.behavior-container h1 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #111;
+}
+
+
 .subtitle {
-  font-size: 1.1rem;
-  color: #555;
+  font-size: 1rem;
+  color: #777;
   margin-bottom: 1.5rem;
 }
 
@@ -26,7 +33,12 @@
   border-radius: 30px;
   cursor: pointer;
   font-weight: 500;
-  transition: background 0.2s;
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+}
+
+.tab-bar button:hover {
+  background-color: #e0ecff;
 }
 
 .tab-bar button.active {
@@ -34,12 +46,18 @@
   color: white;
 }
 
+.tab-bar button:focus {
+  outline: 2px solid #1a73e8;
+  outline-offset: 2px;
+}
+
 /* Tab Content */
 .tab-content {
   padding: 1.5rem;
   background: #ffffff;
   border-radius: 10px;
-  box-shadow: 0 0 6px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+  border: 1px solid #f0f0f0;
   margin-top: 1rem;
   font-size: 1.05rem;
   color: #333;
@@ -57,36 +75,73 @@
   }
 }
 
+/* Form Groups */
+.form-group {
+  margin-bottom: 1rem;
+}
+
 /* Input + Select */
 .tab-content input,
 .tab-content select {
   padding: 0.5rem;
-  margin-right: 1rem;
   margin-top: 0.5rem;
   font-size: 1rem;
   border-radius: 5px;
   border: 1px solid #ccc;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
+.tab-content input:focus,
+.tab-content select:focus,
+.tab-content button:focus {
+  outline: 2px solid #1a73e8;
+  outline-offset: 2px;
+}
+
+/* Buttons with Professional Gradient */
 .tab-content button {
   padding: 0.6rem 1.2rem;
-  background: #1a73e8;
+  background: linear-gradient(to right, #1a73e8, #409eff);
   color: white;
   border: none;
   border-radius: 6px;
   font-weight: bold;
   cursor: pointer;
+  transition: background 0.3s ease, transform 0.15s ease;
   margin-top: 0.5rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
 }
 
-/* Insights List */
-.tab-content ul {
-  margin: 1rem 0;
+.tab-content button:hover {
+  background: linear-gradient(to right, #1669d2, #328cf0);
+  transform: translateY(-1px);
+}
+
+.tab-content button:active {
+  transform: scale(0.97);
+}
+
+/* Form Actions */
+.form-actions {
+  display: flex;
+  margin-top: 1rem;
+  justify-content: flex-start;
+}
+
+/* History Box */
+.history-section {
+  background: #f9f9f9;
+  padding: 1rem;
+  margin-top: 1rem;
+  border-left: 4px solid #1a73e8;
+  border-radius: 6px;
+  font-size: 0.95rem;
+}
+
+.history-section ul {
   padding-left: 1.2rem;
-}
-
-.tab-content li {
-  margin-bottom: 0.5rem;
 }
 
 /* Alert Box */
@@ -97,6 +152,11 @@
   border: 1px solid #ffeeba;
   border-radius: 8px;
   margin-bottom: 1.5rem;
+}
+
+.alert-box::before {
+  content: "⚠️";
+  margin-right: 0.5rem;
 }
 
 /* Chart Wrapper */
@@ -152,6 +212,12 @@
     margin: 0.5rem 0;
   }
 
+  .form-actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+  }
+
   .tab-content button {
     width: 100%;
   }
@@ -164,4 +230,103 @@
   .modes button {
     width: 100%;
   }
+}
+
+/* Nav active state */
+.nav-active {
+  background: rgba(26, 115, 232, 0.08);
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  font-weight: 600;
+  color: #1a73e8;
+}
+
+/* Screen reader only text */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Reduced motion accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .tab-content {
+    animation: none;
+  }
+}
+
+/* Background */
+body {
+  background: linear-gradient(to bottom, #f6f9fc, #e9f1ff);
+  animation: backgroundFade 1s ease-in-out;
+}
+
+@keyframes backgroundFade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/*report*/
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+}
+
+.summary-item {
+  background: #f8f9fb;
+  border-radius: 8px;
+  padding: 0.8rem 1.2rem;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-direction: column;
+}
+
+.summary-item span {
+  color: #555;
+  font-size: 0.9rem;
+  margin-bottom: 0.3rem;
+}
+
+.summary-item strong {
+  color: #1a73e8;
+  font-weight: 600;
+  font-size: 1.05rem;
+}
+
+.summary-item {
+  background: #f8f9fb;
+  border-radius: 8px;
+  padding: 0.8rem 1.2rem;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-direction: column;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.summary-item:hover {
+  transform: scale(1.035);
+  box-shadow: 0 8px 20px rgba(26, 115, 232, 0.15);
+  z-index: 1;
+}
+
+.report-section {
+  margin-top: 2.5rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #222;
+  border-left: 4px solid #1a73e8;
+  padding-left: 0.75rem;
 }

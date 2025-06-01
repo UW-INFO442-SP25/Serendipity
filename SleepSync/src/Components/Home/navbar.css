@@ -95,3 +95,29 @@ nav a.active {
   }
 }
 
+/* Google Translate toggle container - fixed to bottom right of screen */
+.translate-toggle {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1001;
+  font-size: 0.85rem;
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 4px 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Hide Google Translate banner */
+.goog-te-banner-frame.skiptranslate {
+  display: none !important;
+}
+body {
+  top: 0 !important;
+}
+
+/* Make translate font consistent with site */
+.goog-te-gadget {
+  font-family: 'Inter', sans-serif !important;
+  font-size: 0.9rem !important;
+}

@@ -4,6 +4,7 @@
   box-sizing: border-box;
 }
 
+/* Hero Section */
 .hero {
   background-image: url('../../assets/nightsky.jpeg');
   background-size: cover;
@@ -17,6 +18,17 @@
   min-height: 150px;
   margin-bottom: 60px;
   margin-top: 30px;
+  position: relative;
+  z-index: 0;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 16px;
+  z-index: -1;
 }
 
 .hero-content {
@@ -31,9 +43,8 @@
 .hero-content p {
   font-size: 1.1rem;
   margin-bottom: 20px;
-  max-width: none;
-  white-space: nowrap;
   font-weight: 800;
+  white-space: normal;
 }
 
 .hero-btn {
@@ -106,7 +117,23 @@
   margin-bottom: 10px;
 }
 
-/* Educational Resources Section */
+.feature-card.clickable {
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  border: 1px solid #ddd;
+}
+
+.feature-card.clickable:hover {
+  transform: translateY(-5px);
+  border-color: #0070f3;
+}
+
+.feature-card.clickable:focus {
+  outline: 3px solid #1f70c1;
+  outline-offset: 2px;
+}
+
+/* Resources Section */
 .resources {
   margin-bottom: 60px;
 }
@@ -136,11 +163,13 @@
 .card:hover {
   transform: translateY(-5px);
   border-color: #0070f3;
+  cursor: pointer;
 }
 
 .card img {
   width: 100%;
   height: 150px;
+  min-height: 150px;
   object-fit: cover;
   border-bottom: 1px solid #eee;
 }
@@ -163,6 +192,7 @@
 
 .view-all-btn {
   margin-top: 24px;
+  margin-bottom: 2rem;
   background-color: white;
   color: #1f70c1;
   border: 2px solid #1f70c1;
@@ -172,20 +202,42 @@
   cursor: pointer;
 }
 
-.feature-card.clickable {
-  cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
-  border: 1px solid #ddd; /* default gray border */
+/* Video Section */
+.video-section {
+  margin-bottom: 60px;
 }
 
-.feature-card.clickable:hover {
-  transform: translateY(-5px);
-  border-color: #0070f3; /* blue border on hover */
+.video-section h2 {
+  font-size: 1.8rem;
+  margin-bottom: 10px;
 }
 
+.video-section p {
+  font-size: 1rem;
+  color: #444;
+  margin-bottom: 20px;
+}
 
+.video-wrapper {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  overflow: hidden;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
 
-/* mobile and tablet: max-width 1023px */
+.video-wrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 12px;
+}
+
+/* Responsive */
 @media (max-width: 1023px) {
   .home-container {
     padding: 20px 16px;
@@ -261,4 +313,3 @@
     font-size: 0.9rem;
   }
 }
-

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getAuth, updateEmail, updatePassword } from 'firebase/auth';
+import { getAuth } from 'firebase/auth';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
 import { db } from '../../firebase';
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
@@ -20,14 +20,11 @@ export default function Profile() {
     bio: '',
     avatarUrl: ''
   });
-  const [email, setEmail] = useState('');
-  const [newPassword, setNewPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [message, setMessage] = useState('');
   const [isEditing, setIsEditing] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
   const [previewUrl, setPreviewUrl] = useState('');
   const [uploadProgress, setUploadProgress] = useState(0);
+  const [message, setMessage] = useState('');
   const [saving, setSaving] = useState(false);
   const [loading, setLoading] = useState(true);
 
@@ -44,7 +41,6 @@ export default function Profile() {
       if (docSnap.exists()) {
         const data = docSnap.data();
         setProfile(data);
-        setEmail(user.email);
       }
       setLoading(false);
     };
@@ -71,11 +67,6 @@ export default function Profile() {
   };
 
   const handleSave = async () => {
-    if (newPassword && newPassword !== confirmPassword) {
-      setMessage('Passwords do not match');
-      return;
-    }
-
     try {
       setSaving(true);
       const docRef = doc(db, 'profiles', user.uid);
@@ -84,16 +75,8 @@ export default function Profile() {
       const completeUpdate = async () => {
         await setDoc(docRef, updatedData);
         setProfile(updatedData);
-
-        if (email !== user.email) {
-          await updateEmail(user, email);
-        }
-
-        if (newPassword) {
-          await updatePassword(user, newPassword);
-        }
-
         setMessage('Info updated!');
+        setTimeout(() => setMessage(''), 3000); 
         resetEditState();
       };
 
@@ -131,8 +114,6 @@ export default function Profile() {
     setSelectedFile(null);
     setPreviewUrl('');
     setUploadProgress(0);
-    setNewPassword('');
-    setConfirmPassword('');
     setSaving(false);
   };
 
@@ -144,8 +125,8 @@ export default function Profile() {
     }
   };
 
-  if (!user) return <p>Loading user...</p>;
-  if (loading) return <p>Loading profile...</p>;
+  if (!user) return <p role="status">Loading user...</p>;
+  if (loading) return <p role="status">Loading profile...</p>;
 
   const creationDate = new Date(user.metadata.creationTime);
   const formattedDate = creationDate.toLocaleString('default', {
@@ -164,12 +145,12 @@ export default function Profile() {
             <label htmlFor="avatar-upload" className="avatar-wrapper">
               <img
                 src={previewUrl || profile.avatarUrl || defaultAvatar}
-                alt="Avatar"
+                alt="User avatar"
                 className="avatar-img"
               />
               {isEditing && (
                 <>
-                  <img src={addIcon} alt="Edit" className="avatar-edit-icon" />
+                  <img src={addIcon} alt="Upload new avatar" className="avatar-edit-icon" />
                   <input
                     id="avatar-upload"
                     type="file"
@@ -181,47 +162,35 @@ export default function Profile() {
               )}
             </label>
             {uploadProgress > 0 && uploadProgress < 100 && (
-              <p className="upload-progress">Uploading: {uploadProgress.toFixed(0)}%</p>
+              <p className="upload-progress" role="status">
+                Uploading: {uploadProgress.toFixed(0)}%
+              </p>
             )}
           </div>
 
           <div className="profile-details">
             {isEditing ? (
               <>
-                <label>Name</label>
+                <label htmlFor="name">Name</label>
                 <input
+                  id="name"
                   value={profile.name}
                   onChange={(e) => setProfile({ ...profile, name: e.target.value })}
                   placeholder="Full Name"
                 />
-                <label>Username</label>
+                <label htmlFor="username">Username</label>
                 <input
+                  id="username"
                   value={profile.username}
                   onChange={(e) => setProfile({ ...profile, username: e.target.value })}
                   placeholder="Username"
                 />
-                <label>Email</label>
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-                <label>New Password</label>
-                <input
-                  type="password"
-                  value={newPassword}
-                  onChange={(e) => setNewPassword(e.target.value)}
-                />
-                <label>Confirm Password</label>
-                <input
-                  type="password"
-                  value={confirmPassword}
-                  onChange={(e) => setConfirmPassword(e.target.value)}
-                />
-                <label>Bio</label>
+                <label htmlFor="bio">Bio</label>
                 <textarea
+                  id="bio"
                   value={profile.bio}
                   onChange={(e) => setProfile({ ...profile, bio: e.target.value })}
+                  placeholder="Tell us a bit about yourself"
                 />
               </>
             ) : (
@@ -244,29 +213,37 @@ export default function Profile() {
                 Save
               </button>
             ) : (
-              <button
-                onClick={() => setIsEditing(true)}
-                className="edit-btn"
-              >
+              <button onClick={() => setIsEditing(true)} className="edit-btn">
                 Edit Profile
               </button>
             )}
           </div>
-          {message && <p className="success-msg">{message}</p>}
         </div>
 
         {!isEditing && (
-          <div className="profile-footer">
-            <p><strong>Last login:</strong> {new Date(user.metadata.lastSignInTime).toLocaleString()}</p>
-            <p><strong>User ID:</strong> {user.uid}</p>
+          <div className="profile-footer-card">
+            <p>
+              <strong>Last login:</strong> {new Date(user.metadata.lastSignInTime).toLocaleString()}
+            </p>
+            <p>
+              <strong>User ID:</strong> {user.uid}
+            </p>
           </div>
         )}
 
-        {/* 👇 Right bottom logout inside profile-wrapper */}
         <div className="logout-wrapper">
-          <button className="logout-btn" onClick={handleLogout}>Log Out</button>
+          <button className="logout-btn" onClick={handleLogout}>
+            Log Out
+          </button>
         </div>
       </div>
+
+      {/* Floating Message */}
+      {message && (
+        <div className="floating-message" role="alert">
+          {message}
+        </div>
+      )}
     </div>
   );
 }
