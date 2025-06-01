@@ -272,3 +272,10 @@ padding: 12px 24px;
   margin-bottom: 6px;
 
 }
+
+.new-post:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+

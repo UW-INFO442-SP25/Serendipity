@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getAuth } from 'firebase/auth';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
 import { db } from '../../firebase';
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
@@ -9,10 +9,9 @@ import addIcon from '../../assets/add-icon-circle.png';
 import './profile.css';
 
 export default function Profile() {
-  const auth = getAuth();
   const navigate = useNavigate();
-  const user = auth.currentUser;
   const storage = getStorage();
+  const [user, setUser] = useState(null);
 
   const [profile, setProfile] = useState({
     name: '',
@@ -28,25 +27,27 @@ export default function Profile() {
   const [saving, setSaving] = useState(false);
   const [loading, setLoading] = useState(true);
 
+  // Handle auth state and profile fetch
   useEffect(() => {
-    if (!user || user.isAnonymous) {
-      alert('You must be logged in to access this page.');
-      navigate('/login');
-      return;
-    }
+    const auth = getAuth();
+    const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
+      if (!firebaseUser || firebaseUser.isAnonymous) {
+        alert('You must be logged in to access this page.');
+        navigate('/login');
+        return;
+      }
+      setUser(firebaseUser);
 
-    const fetchProfile = async () => {
-      const docRef = doc(db, 'profiles', user.uid);
+      const docRef = doc(db, 'profiles', firebaseUser.uid);
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
-        const data = docSnap.data();
-        setProfile(data);
+        setProfile(docSnap.data());
       }
       setLoading(false);
-    };
+    });
 
-    fetchProfile();
-  }, [user, navigate]);
+    return () => unsubscribe();
+  }, [navigate]);
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -76,7 +77,7 @@ export default function Profile() {
         await setDoc(docRef, updatedData);
         setProfile(updatedData);
         setMessage('Info updated!');
-        setTimeout(() => setMessage(''), 3000); 
+        setTimeout(() => setMessage(''), 3000);
         resetEditState();
       };
 
@@ -118,6 +119,7 @@ export default function Profile() {
   };
 
   const handleLogout = async () => {
+    const auth = getAuth();
     const confirmed = window.confirm('Are you sure you want to log out?');
     if (confirmed) {
       await auth.signOut();
@@ -125,7 +127,6 @@ export default function Profile() {
     }
   };
 
-  if (!user) return <p role="status">Loading user...</p>;
   if (loading) return <p role="status">Loading profile...</p>;
 
   const creationDate = new Date(user.metadata.creationTime);
