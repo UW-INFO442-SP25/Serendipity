@@ -30,6 +30,9 @@ We aim to address Sustainable Development Goal (SDG3): Good Health and Well-Bein
 ## User Personas
 Link to view User Personas: [SleepSync User Personas](https://github.com/UW-INFO442-SP25/Serendipity/blob/cddf0009308b2fcf9f632daffc4a73413f87ba0e/UserPersonas.pdf)
 
+## Testing Protocols
+Our testing protocols can be found here: 
+
 ## References
 What are the different types of CPAP machines?. SleepApnea.org. (2023, September 18). https://www.sleepapnea.org/cpap/cpap-machine-types/?srsltid=AfmBOooTYcbxHo4AA8j9SZvq8tQm-x89rFqb3UQQQWii61fcjoT3TiRA
 
