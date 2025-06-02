@@ -2,8 +2,7 @@
 **Group 5: Serendipity**
 
 
-Our published site can be viewed here:
-
+Our published site can be viewed here: https://sleepsync-46248.web.app
 ## Our Focus
 We aim to address Sustainable Development Goal (SDG3): Good Health and Well-Being by improving the long-term management of Obstructive Sleep Apnea Syndrome (OSAS). OSAS affects over 936 million adults globally, but treatment adherence is often low. Our platform focuses on enhancing treatment adherence, emotional motivation, and health literacy by addressing barriers like discomfort with CPAP devices, lack of real-time feedback, emotional disengagement, and limited access to affordable treatment options. We envision a digital tool that empowers patients with personalized support and information for better health outcomes.
 
