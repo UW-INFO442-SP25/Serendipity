@@ -98,7 +98,7 @@ nav a.active {
 /* Google Translate toggle container - fixed to bottom right of screen */
 .translate-toggle {
   position: fixed;
-  bottom: 20px;
+  bottom: 553px;
   right: 20px;
   z-index: 1001;
   font-size: 0.85rem;
