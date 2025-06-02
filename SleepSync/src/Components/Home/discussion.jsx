@@ -96,14 +96,14 @@ const Discussion = () => {
   return (
     <div>
       <div className={showPopup ? 'blur-container blur-filter' : 'blur-container'}>
-        <main className="forum" role="main">
+        <main className="forum">
           <h1>Discussion Forum</h1>
           <p>
             Connect with others, share experiences, and find support in your OSAS
             management
           </p>
 
-          <div className="filters" role="group" aria-label="Filter discussions by category">
+          <div className="filters">
             {filters.map((filter) => (
               <button
                 key={filter}
@@ -116,20 +116,14 @@ const Discussion = () => {
           </div>
 
           <div className="search-bar">
-          <label htmlFor="search-input" className="sr-only">Search discussions</label>
             <input 
-              id="search-input"
-              type="text"
-              placeholder="Search discussions..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)} 
-            />
-          <button onClick={() => setSearchQuery(searchQuery)}>Search</button>
-        </div>
-
-
-
-
+            type="text"
+            placeholder="Search discussions..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)} 
+          />
+            <button onClick={() => setSearchQuery(searchQuery)}>Search</button>
+          </div>
 
           <button
             className="new-post"
@@ -141,7 +135,7 @@ const Discussion = () => {
           </button>
 
           {!user || user.isAnonymous ? (
-            <p role="alert" style={{ color: '#c00', marginTop: '1rem' }}>
+            <p style={{ color: '#c00', marginTop: '1rem' }}>
               Guests cannot post. Please sign in to participate.
             </p>
           ) : null}
@@ -160,7 +154,6 @@ const Discussion = () => {
                   to={`/post/${discussion.id}`}
                   key={discussion.id}
                   className="discussions-Link"
-                  aria-label={`View discussion titled ${discussion.title}`}
                 >
                   <h3>{discussion.title}</h3>
                   <p>
