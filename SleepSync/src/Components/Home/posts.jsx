@@ -80,7 +80,7 @@ const Post = () => {
             value={newReply}
             onChange={(e) => setNewReply(e.target.value)}
           />
-          <button onClick={handleReply}>Reply</button>
+          <button onClick={handleReply}>Post Reply</button>
         </div>
       </div>
     </div>
