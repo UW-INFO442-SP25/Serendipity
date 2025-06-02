@@ -31,7 +31,7 @@ We aim to address Sustainable Development Goal (SDG3): Good Health and Well-Bein
 Link to view User Personas: [SleepSync User Personas](https://github.com/UW-INFO442-SP25/Serendipity/blob/cddf0009308b2fcf9f632daffc4a73413f87ba0e/UserPersonas.pdf)
 
 ## Testing Protocols
-Our testing protocols can be found here: [Testing Protocol] (https://github.com/UW-INFO442-SP25/Serendipity/blob/3a97956585f9dd578fd044b30e10ccd2b988cfde/TestingProtocol.pdf)
+Our testing protocols can be found here: [Testing Protocol](https://github.com/UW-INFO442-SP25/Serendipity/blob/3a97956585f9dd578fd044b30e10ccd2b988cfde/TestingProtocol.pdf)
 
 ## Bugs
 - In the discussion forum, for "Posted by", some are by Anonymous while others are "Posted by Loading" instead of the proper username
