@@ -5,6 +5,15 @@ import './home.css';
 import img1 from '../../assets/img1.jpg';
 import img2 from '../../assets/img2.jpg';
 import img3 from '../../assets/img3.jpg';
+import dianaImg from '../../IMGs/diana.jpeg';
+import iraImg from '../../IMGs/ira.jpeg';
+import kellyImg from '../../IMGs/kelly.jpeg'
+import noahImg from '../../IMGs/noah.jpeg'
+import elsieImg from '../../IMGs/elsie.jpeg'
+import linkedinLogo from '../../IMGs/Linkedin.png';
+
+
+
 
 const Home = () => {
   const navigate = useNavigate();
@@ -181,18 +190,55 @@ const Home = () => {
           View All Resources
         </button>
       </section>
-      <div className='meet our team'>
+      <div className='team-section'>
         <h1>Meet Our Team!</h1>
       </div>
       <div className='image-row'>
         <div className='image-container'>
           <div className='image-name'>Diana Almanza Almonte
             <a href="https://www.linkedin.com/in/diana-almanza-almonte-79bb67232/" target="_blank" rel="noopener noreferrer">
-                <img class="linkedin-logo" src="/IMGs/Linkedin.png" alt="Linkedin-logo" />
+                <img class="linkedin-logo" src={linkedinLogo} alt="Linkedin-logo" />
             </a>
           </div>
-          <img class="profile-pic" src="/IMGs/diana.jpeg" alt="Diana Linkedin pic" />
+          <img class="profile-pic" src={dianaImg} alt="Diana Linkedin pic" />
         </div>
+        <div className='image-container'>
+          <div className='image-name'>Ira Mangipudi
+            <a href="https://www.linkedin.com/in/ira-mangipudi-31a647259/" target="_blank" rel="noopener noreferrer">
+                <img class="linkedin-logo" src={linkedinLogo} alt="Linkedin-logo" />
+            </a>
+          </div>
+          <img class="profile-pic" src={iraImg} alt="Ira Linkedin pic" />
+        </div>
+        <div className='image-container'>
+          <div className='image-name'>Kelly Thai
+            <a href="https://www.linkedin.com/in/thaikelly/" target="_blank" rel="noopener noreferrer">
+                <img class="linkedin-logo" src={linkedinLogo} alt="Linkedin-logo" />
+            </a>
+          </div>
+          <img class="profile-pic" src={kellyImg} alt=" Linkedin pic" />
+        </div>
+        <div className='image-container'>
+          <div className='image-name'>Elsie Han
+            <a href="https://www.linkedin.com/in/jiuzhen-han-3064762b6/" target="_blank" rel="noopener noreferrer">
+                <img class="linkedin-logo" src={linkedinLogo} alt="Linkedin-logo" />
+            </a>
+          </div>
+          <img class="profile-pic" src={elsieImg} alt=" Linkedin pic" />
+        </div>
+         <div className='image-container'>
+          <div className='image-name'>Noah Karst
+            <a href="https://www.linkedin.com/in/noahkarst/" target="_blank" rel="noopener noreferrer">
+                <img class="linkedin-logo" src={linkedinLogo} alt="Linkedin-logo" />
+            </a>
+          </div>
+          <img class="profile-pic" src={noahImg} alt=" Linkedin pic" />
+        </div>
+
+
+
+
+
       </div>
 
 
