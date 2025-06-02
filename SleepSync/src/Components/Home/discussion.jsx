@@ -16,7 +16,9 @@ import './discussion.css';
 import './popup.css';
 import Popup from './popup.jsx';
 
+
 const Discussion = () => {
+  const [searchQuery, setSearchQuery] = useState('');
   const [showPopup, setShowPopup] = useState(false);
   const [discussions, setDiscussions] = useState([]);
   const [activeFilter, setActiveFilter] = useState('All');
@@ -85,10 +87,11 @@ const Discussion = () => {
     return () => unsubscribe();
   }, []);
 
-  const filteredDiscussions =
-    activeFilter === 'All'
-      ? discussions
-      : discussions.filter((d) => d.tag === activeFilter);
+  const filteredDiscussions = discussions.filter((d) => {
+    const matchesFilter = activeFilter === 'All' || d.tag === activeFilter;
+    const matchesSearch = d.title.toLowerCase().includes(searchQuery.toLowerCase());
+    return matchesFilter && matchesSearch;
+  });
 
   return (
     <div>
@@ -113,8 +116,13 @@ const Discussion = () => {
           </div>
 
           <div className="search-bar">
-            <input type="text" placeholder="Search discussions..." />
-            <button>Search</button>
+            <input 
+            type="text"
+            placeholder="Search discussions..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)} 
+          />
+            <button onClick={() => setSearchQuery(searchQuery)}>Search</button>
           </div>
 
           <button
