@@ -33,6 +33,12 @@ Link to view User Personas: [SleepSync User Personas](https://github.com/UW-INFO
 ## Testing Protocols
 Our testing protocols can be found here: 
 
+## Bugs
+- In the discussion forum, for "Posted by", some are by Anonymous while others are "Posted by Loading" instead of the proper username
+   - To view who the thread was posted by, they can click into a specific post and view the usernames.
+- In the discussion forum once a user clicks into a specific thread, the "Post" reply button is covered by the language toggle
+   - To post a reply, the user has to click the corner or remaining blue space of the Post button that is visible behind the toggle
+
 ## References
 What are the different types of CPAP machines?. SleepApnea.org. (2023, September 18). https://www.sleepapnea.org/cpap/cpap-machine-types/?srsltid=AfmBOooTYcbxHo4AA8j9SZvq8tQm-x89rFqb3UQQQWii61fcjoT3TiRA
 

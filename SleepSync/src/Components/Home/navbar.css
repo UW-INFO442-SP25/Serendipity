@@ -95,7 +95,7 @@ nav a.active {
   }
 }
 
-/* Google Translate toggle container - fixed to bottom right of screen */
+/* Google Translate toggle container - fixed to top right of screen */
 .translate-toggle {
   position: fixed;
   bottom: 553px;
