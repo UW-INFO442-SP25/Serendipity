@@ -181,6 +181,21 @@ const Home = () => {
           View All Resources
         </button>
       </section>
+      <div className='meet our team'>
+        <h1>Meet Our Team!</h1>
+      </div>
+      <div className='image-row'>
+        <div className='image-container'>
+          <div className='image-name'>Diana Almanza Almonte
+            <a href="https://www.linkedin.com/in/diana-almanza-almonte-79bb67232/" target="_blank" rel="noopener noreferrer">
+                <img class="linkedin-logo" src="/IMGs/Linkedin.png" alt="Linkedin-logo" />
+            </a>
+          </div>
+          <img class="profile-pic" src="/IMGs/diana.jpeg" alt="Diana Linkedin pic" />
+        </div>
+      </div>
+
+
     </div>
   );
 };
