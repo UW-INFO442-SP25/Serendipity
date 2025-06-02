@@ -279,3 +279,17 @@ padding: 12px 24px;
   opacity: 0.6;
 }
 
+.delete-button {
+  position: relative;
+  background-color: transparent;
+  border: none;
+  color: #e00;
+  cursor: pointer;
+  font-size: 0.85rem;
+  padding: 0;
+}
+
+.delete-button:hover {
+  text-decoration: underline;
+}
+
