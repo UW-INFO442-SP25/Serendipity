@@ -29,10 +29,10 @@ html, body, #root {
 }
 
 .forum p {
-margin-top: 0;
-margin-bottom: 20px;
-font-size: 1rem;
-color: #444;
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-size: 1rem;
+  color: #444;
 }
 
 .filters {
@@ -43,22 +43,23 @@ color: #444;
 }
 
 .filter {
-  padding: 8px px;
+  padding: 8px 16px;
   border: none;
   background-color: #eee;
   border-radius: 20px;
   cursor: pointer;
 }
-/* applys the blue background with white text */
+
 .filter.active {
   background-color: #0070f3;
-  color: white;   
+  color: white;
 }
 
 .filter:hover {
   background-color: #e0f0ff;
   color: #0070f3;
 }
+
 .search-bar {
   display: flex;
   gap: 10px;
@@ -99,22 +100,25 @@ color: #444;
   color: #0070f3;
 }
 
+.new-post:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
 
 .discussions {
   width: 100%;
   max-width: none;
-  
 }
 
 .discussions-Link {
   display: block;
   padding: 15px 0;
   border-top: 1px solid #ddd;
-  border-bottom: 15px 0;
   text-decoration: none;
 }
 
-.discussions .discussion {    
+.discussions .discussion {
   padding: 15px 0;
   border-top: 1px solid #ddd;
 }
@@ -132,9 +136,9 @@ color: #444;
 .tag {
   color: #0070f3;
   font-size: 0.9em;
-  
 }
 
+/* Responsive Design */
 @media (max-width: 1023px) {
   .forum {
     padding: 20px 16px;
@@ -193,6 +197,23 @@ color: #444;
   .tag {
     font-size: 0.85rem;
   }
+
+  .add-comment {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 10px 16px;
+  }
+
+  .add-comment input {
+    width: 100%;
+    font-size: 1rem;
+  }
+
+  .add-comment button {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+  }
 }
 
 .post-page {
@@ -201,12 +222,12 @@ color: #444;
   min-height: 100vh;
   position: relative;
 }
+
 .comments {
-  margin-bottom: 100px
+  margin-bottom: 100px;
 }
 
 .add-comment {
-
   display: flex;
   bottom: 0;
   left: 0;
@@ -217,9 +238,9 @@ color: #444;
   position: fixed;
   border-top: 1px solid #ccc;
   background-color: white;
-  box-shadow: 0-2px 8px rgba(0, 0, 0, 0.03);
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.03);
   box-sizing: border-box;
-  z-index:999;
+  z-index: 999;
 }
 
 .add-comment input {
@@ -231,7 +252,7 @@ color: #444;
 }
 
 .add-comment button {
-padding: 12px 24px;
+  padding: 12px 24px;
   background-color: #0070f3;
   color: white;
   border: none;
@@ -261,22 +282,14 @@ padding: 12px 24px;
   box-sizing: border-box;
   padding: 15px;
   margin-bottom: 15px;
-  width: calc(100% + 120px);
+  width: 100%;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-
 }
 
-.comment-box  strong {
+.comment-box strong {
   color: #333;
   display: block;
   margin-bottom: 6px;
-
-}
-
-.new-post:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
-  opacity: 0.6;
 }
 
 .delete-button {
@@ -293,6 +306,7 @@ padding: 12px 24px;
   text-decoration: underline;
 }
 
+/* Accessibility helper */
 .sr-only {
   position: absolute;
   width: 1px;
@@ -304,4 +318,3 @@ padding: 12px 24px;
   white-space: nowrap;
   border: 0;
 }
-

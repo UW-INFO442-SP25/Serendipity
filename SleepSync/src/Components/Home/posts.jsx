@@ -77,16 +77,22 @@ const Post = () => {
   return (
     <div className="post-page">
       <div className="forum">
-        <button onClick={() => window.history.back()}>&larr; Back</button>
+        <button onClick={() => window.history.back()} aria-label="Go back to discussion list">
+          &larr; Back
+        </button>
 
-        <div className="post-box">
-          <h2>{post.title}</h2>
+        <div className="post-box" role="article" aria-labelledby="post-title">
+          <h2 id="post-title">{post.title}</h2>
           <p><strong>Posted by {post.author}</strong> · {post.tag}</p>
           <p>{post.content || "Post content here..."}</p>
         </div>
 
-        <div className="comments">
-          <h3>Comments ({replies.length})</h3>
+        <div
+          className="comments"
+          role="region"
+          aria-labelledby="comments-title"
+        >
+          <h3 id="comments-title">Comments ({replies.length})</h3>
           {replies.map(reply => (
             <div key={reply.id} className="comment-box">
               <strong>{reply.author}</strong>
@@ -95,13 +101,17 @@ const Post = () => {
           ))}
 
           <div className="add-comment">
+            <label htmlFor="replyInput" className="sr-only">Add a comment</label>
             <input
+              id="replyInput"
               type="text"
               placeholder="Add a comment..."
               value={newReply}
               onChange={(e) => setNewReply(e.target.value)}
             />
-            <button onClick={handleReply}>Reply</button>
+            <button onClick={handleReply} aria-label="Submit reply">
+              Reply
+            </button>
           </div>
         </div>
       </div>

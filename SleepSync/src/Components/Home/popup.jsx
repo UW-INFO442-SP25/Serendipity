@@ -1,23 +1,35 @@
 import React, { useState } from "react";
-import './popup.css'; 
+import './popup.css';
+
 const Popup = ({ onConfirm, onCancel }) => {
   const [formData, setFormData] = useState({
     title: '',
     category: '',
     content: ''
   });
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     onConfirm(formData);
   };
+
   return (
-    <div className="popup">
+    <div
+      className="popup"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="popup-title"
+      aria-describedby="popup-description"
+    >
       <div className="popup-content">
-        <h2 className="popup-title">Create New Post</h2>
+        <h2 id="popup-title" className="popup-title">Create New Post</h2>
+        <p id="popup-description" className="sr-only">Use this form to create a new discussion post with a title, category, and content.</p>
+
         <form onSubmit={handleSubmit} className="popup-form">
           <label htmlFor="title">Title</label>
           <input
@@ -29,6 +41,7 @@ const Popup = ({ onConfirm, onCancel }) => {
             onChange={handleChange}
             required
           />
+
           <label htmlFor="category">Category</label>
           <select
             id="category"
@@ -44,6 +57,7 @@ const Popup = ({ onConfirm, onCancel }) => {
             <option value="Reviews">Reviews</option>
             <option value="Questions">Questions</option>
           </select>
+
           <label htmlFor="content">Content</label>
           <textarea
             id="content"
@@ -53,13 +67,28 @@ const Popup = ({ onConfirm, onCancel }) => {
             onChange={handleChange}
             required
           />
+
           <div className="popup-buttons">
-            <button type="button" className="cancel-button" onClick={onCancel}>Cancel</button>
-            <button type="submit" className="post-button">Post</button>
+            <button
+              type="button"
+              className="cancel-button"
+              onClick={onCancel}
+              aria-label="Cancel post creation"
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              className="post-button"
+              aria-label="Submit new post"
+            >
+              Post
+            </button>
           </div>
         </form>
       </div>
     </div>
   );
 };
+
 export default Popup;

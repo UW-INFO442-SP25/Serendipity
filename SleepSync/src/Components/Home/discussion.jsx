@@ -16,7 +16,6 @@ import './discussion.css';
 import './popup.css';
 import Popup from './popup.jsx';
 
-
 const Discussion = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [showPopup, setShowPopup] = useState(false);
@@ -99,16 +98,17 @@ const Discussion = () => {
         <main className="forum">
           <h1>Discussion Forum</h1>
           <p>
-            Connect with others, share experiences, and find support in your OSAS
-            management
+            Connect with others, share experiences, and find support in your OSAS management
           </p>
 
-          <div className="filters">
+          <div className="filters" role="region" aria-label="Filter by category">
             {filters.map((filter) => (
               <button
                 key={filter}
                 className={`filter ${activeFilter === filter ? 'active' : ''}`}
                 onClick={() => setActiveFilter(filter)}
+                aria-pressed={activeFilter === filter}
+                aria-label={`Filter by ${filter}`}
               >
                 {filter}
               </button>
@@ -116,13 +116,16 @@ const Discussion = () => {
           </div>
 
           <div className="search-bar">
-            <input 
-            type="text"
-            placeholder="Search discussions..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)} 
-          />
-            <button onClick={() => setSearchQuery(searchQuery)}>Search</button>
+            <label htmlFor="search" className="sr-only">Search Discussions</label>
+            <input
+              id="search"
+              type="text"
+              placeholder="Search discussions..."
+              aria-label="Search discussions"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+            <button onClick={() => setSearchQuery(searchQuery)} aria-label="Search">Search</button>
           </div>
 
           <button
@@ -130,6 +133,8 @@ const Discussion = () => {
             onClick={handleNewPostClick}
             disabled={!user || user.isAnonymous}
             title={!user || user.isAnonymous ? 'Sign in to create a new post' : ''}
+            aria-haspopup="dialog"
+            aria-label="Create new post"
           >
             + New Post
           </button>
@@ -140,7 +145,7 @@ const Discussion = () => {
             </p>
           ) : null}
 
-          <section className="discussions">
+          <section className="discussions" role="list" aria-label="List of discussion posts">
             <h2>
               {activeFilter === 'All' ? 'Recent Discussions' : `${activeFilter} Discussions`}
             </h2>
@@ -154,11 +159,11 @@ const Discussion = () => {
                   to={`/post/${discussion.id}`}
                   key={discussion.id}
                   className="discussions-Link"
+                  role="listitem"
                 >
                   <h3>{discussion.title}</h3>
                   <p>
-                    Posted by{' '}
-                    {authorNames[discussion.authorId] || 'Loading...'} ·{' '}
+                    Posted by {authorNames[discussion.authorId] || 'Loading...'} ·{' '}
                     {discussion.replies || 0} replies · Most recent: {formattedDate}
                   </p>
                   <span className="tag">{discussion.tag}</span>
