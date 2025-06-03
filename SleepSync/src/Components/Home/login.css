@@ -78,7 +78,7 @@ a:hover {
 /* Form section */
 .login-form {
   flex: 1;
-  min-width: 360px;
+  min-width: 0;
   padding: 4rem;
   display: flex;
   flex-direction: column;
@@ -184,7 +184,7 @@ a:hover {
   align-items: center;
   justify-content: center;
   padding: 3rem;
-  min-width: 360px;
+  min-width: 0;
 }
 
 .login-image img {
@@ -194,7 +194,7 @@ a:hover {
   transform: scale(1.08);
 }
 
-/* Responsive */
+/* Tablet */
 @media (max-width: 1024px) {
   .login-card-wrapper {
     flex-direction: column;
@@ -221,5 +221,45 @@ a:hover {
 
   .login-logo {
     margin: 0 auto;
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .login-page-wrapper {
+    padding: 1rem;
+  }
+
+  .login-form {
+    padding: 1.5rem;
+  }
+
+  .login-form h1 {
+    font-size: 28px;
+  }
+
+  .login-note,
+  .login-label,
+  .login-signup-text {
+    font-size: 14px;
+  }
+
+  .login-form input {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .login-btn,
+  .login-guest-btn {
+    font-size: 14px;
+    padding: 12px;
+  }
+
+  .forgot-link {
+    font-size: 13px;
+  }
+
+  .login-logo {
+    font-size: 24px;
   }
 }
